@@ -7,17 +7,18 @@ import logo from '../logo.svg';
 
 export function BrowseContainer({ slides }) {
   const [category, setCategory] = useState('series');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [slideRows, setSlideRows] = useState([]);
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [slideRows, setSlideRows] = useState([]);
+
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 1500);
   }, [profile.displayName]);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function BrowseContainer({ slides }) {
   return profile.displayName ? (
     <>
       {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
+
       <Header src={'joker1'} dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
@@ -62,6 +64,7 @@ export function BrowseContainer({ slides }) {
             </Header.Profile>
           </Header.Group>
         </Header.Frame>
+
         <Header.Feature>
           <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
           <Header.Text>
@@ -92,12 +95,7 @@ export function BrowseContainer({ slides }) {
                 </Card.Item>
               ))}
             </Card.Entities>
-            {/* <Card.Feature category={category}>
-              <Player>
-                <Player.Button />
-                <Player.Video src='/videos/bunny.mp4' />
-              </Player>
-            </Card.Feature> */}
+            <Card.Feature category={category}></Card.Feature>
           </Card>
         ))}
       </Card.Group>

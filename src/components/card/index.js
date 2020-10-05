@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
+
 import {
   Container,
   Group,
@@ -20,8 +21,8 @@ import {
 export const FeatureContext = createContext();
 
 export default function Card({ children, ...restProps }) {
-  const [showFeature, setShowFeature] = useState(false);
   const [itemFeature, setItemFeature] = useState({});
+  const [showFeature, setShowFeature] = useState(false);
 
   return (
     <FeatureContext.Provider
@@ -48,12 +49,12 @@ Card.Text = function CardText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>;
 };
 
-Card.Meta = function CardMeta({ children, ...restProps }) {
-  return <Meta {...restProps}>{children}</Meta>;
-};
-
 Card.Entities = function CardEntities({ children, ...restProps }) {
   return <Entities {...restProps}>{children}</Entities>;
+};
+
+Card.Meta = function CardMeta({ children, ...restProps }) {
+  return <Meta {...restProps}>{children}</Meta>;
 };
 
 Card.Item = function CardItem({ item, children, ...restProps }) {
@@ -73,5 +74,38 @@ Card.Item = function CardItem({ item, children, ...restProps }) {
 };
 
 Card.Image = function CardImage({ ...restProps }) {
-  return <Image {...restProps}></Image>;
+  return <Image {...restProps} />;
+};
+
+Card.Feature = function CardFeature({ children, category, ...restProps }) {
+  const { showFeature, itemFeature, setShowFeature } = useContext(
+    FeatureContext
+  );
+
+  return showFeature ? (
+    <Feature
+      {...restProps}
+      src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}
+    >
+      <Content>
+        <FeatureTitle>{itemFeature.title}</FeatureTitle>
+        <FeatureText>{itemFeature.description}</FeatureText>
+        <FeatureClose onClick={() => setShowFeature(false)}>
+          <img src='/images/icons/close.png' alt='Close' />
+        </FeatureClose>
+
+        <Group margin='30px 0' flexDirection='row' alignItems='center'>
+          <Maturity rating={itemFeature.maturity}>
+            {itemFeature.maturity < 12 ? 'PG' : itemFeature.maturity}
+          </Maturity>
+          <FeatureText fontWeight='bold'>
+            {itemFeature.genre.charAt(0).toUpperCase() +
+              itemFeature.genre.slice(1)}
+          </FeatureText>
+        </Group>
+
+        {children}
+      </Content>
+    </Feature>
+  ) : null;
 };
