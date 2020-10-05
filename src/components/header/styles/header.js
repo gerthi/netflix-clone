@@ -131,7 +131,7 @@ export const Dropdown = styled.div`
   }
 
   ${Group} {
-    margin-bottom: 10;
+    margin-bottom: 10px;
 
     &:last-of-type {
       margin-bottom: 0;
@@ -148,6 +148,8 @@ export const Dropdown = styled.div`
 
   p {
     font-size: 12px;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 `;
 
@@ -164,5 +166,58 @@ export const Profile = styled.div`
   &:hover > ${Dropdown} {
     display: flex;
     flex-direction: column;
+  }
+`;
+
+export const Search = styled.div`
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: white;
+    cursor: pointer;
+  }
+`;
+
+export const SearchIcon = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+
+  img {
+    filter: brightness(0) invert(1);
+    width: 16px;
+  }
+`;
+
+export const SearchInput = styled.input`
+  background-color: #44444459;
+  color: white;
+  border: 1px solid white;
+  transition: width 0.5s ease;
+  height: 30px;
+  font-size: 14px;
+  margin-left: ${({ active }) => (active === true ? '10px' : '0')};
+  padding: ${({ active }) => (active === true ? '0 10px' : '0')};
+  opacity: ${({ active }) => (active === true ? '1' : '0')};
+  width: ${({ active }) => (active === true ? '200px' : '0')};
+`;
+
+export const PlayButton = styled.button`
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
+  background-color: #e6e6e6;
+  color: #000;
+  border-width: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  max-width: 130px;
+  font-size: 22px;
+  font-weight: 500;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: #ff1e1e;
   }
 `;
