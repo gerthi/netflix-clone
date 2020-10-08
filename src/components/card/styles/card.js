@@ -91,7 +91,7 @@ export const Item = styled.div`
     transform: scale(1.3);
     z-index: 99;
   }
-  @media (min-width: 1200px) {
+  @media (min-width: 900px) {
     &:hover ${Meta}, &:hover ${Text}, &:hover ${SubTitle} {
       display: block;
       z-index: 100;
